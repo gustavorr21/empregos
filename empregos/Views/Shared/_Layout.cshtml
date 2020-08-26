@@ -1,67 +1,81 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
+﻿<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+
+    <link href="~/Content/carousel.css" rel="stylesheet" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 
-<body >
+<body>
 
+    <div class="navbar-wrapper">
+        <div class="container">
 
-    <div class="topnav navbar navbar-inverse navbar-fixed-top">
-        <a class="active" href="#home">Home</a>
-        <div>
-            <ul class="nav navbar-nav">
-                <li id="login">@Html.ActionLink("Início", "Index", "Home")</li>
-                <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-            </ul>
-        </div>
-        <div class="login-container">
-            <form action="/action_page.php">
-                <input type="text" placeholder="Username" name="username">
-                <input type="text" placeholder="Password" name="psw">
-                <button type="submit">Login</button>
-            </form>
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a style="margin-left:auto; margin-right:15px; padding:15px 17px 17px 17px" class="navbar-brand" href="#">Empregos</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Início", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Nav header</li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                            <li class="login-container text-right">
+                                <div class="login-container text-right">
+                                    <form>
+                                        <span style="background-color:chartreuse; display: block" id="senhaincorreta" name="senhaincorreta">Senha Incoreta!!!</span>
+                                        <span style="background-color:chartreuse; visibility: hidden" id="nomeLogin" name="nomeLogin"></span>
+                                        <input type="text" placeholder="Username" name="login" id="login">
+                                        <input type="password" placeholder="Password" name="senha" id="senha">
+
+                                        <button type="button" onclick="loginteste()">Login</button>
+                                    </form>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
         </div>
     </div>
 
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Empregos</p>
+    </footer>
 
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Nome do aplicativo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li id="login">@Html.ActionLink("Início", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>*@
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Empregos</p>
-        </footer>
-    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/Login/login.js"></script>
+
 </body>
-</html>
