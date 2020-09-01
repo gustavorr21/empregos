@@ -31,6 +31,8 @@ namespace empregos.Models.ViewModels
 
         public string senha { get; set; }
 
+        public string perfil { get; set; }
+
         public DateTime dataNascimento { get; set; }
 
     }

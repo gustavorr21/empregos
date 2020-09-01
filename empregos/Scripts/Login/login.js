@@ -10,7 +10,8 @@
             data: { login: login, senhalogin: senhalogin },
             success: function (result) {
                 if (!result.Success) {
-                    document.getElementById("senhaincorreta").display = none;
+                    document.getElementById("nomeLogin").style.visibility = "visible";
+                    document.getElementById("nomeLogin").innerHTML = 'login inexistente';
                 }
                 else {
                     document.getElementById("nomeLogin").style.visibility = "visible";

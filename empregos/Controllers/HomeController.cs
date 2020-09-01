@@ -13,6 +13,7 @@ namespace empregos.Controllers
             return View();
         }
 
+        [Authorize(Roles = "ADMin")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
