@@ -214,7 +214,7 @@
     <Compile Include="Models\usuario.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModels\usuario.cs" />
+    <Compile Include="Models\ViewModels\usuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -383,6 +383,7 @@
     <Content Include="Scripts\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Scripts\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Scripts\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Views\Login\CreateUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

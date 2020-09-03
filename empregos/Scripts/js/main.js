@@ -1,7 +1,8 @@
 
 (function ($) {
     "use strict";
-
+    import swal from 'sweetalert2';
+    window.Swal = Swal;
     
     /*==================================================================
     [ Validate ]*/

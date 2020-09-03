@@ -27,10 +27,10 @@ namespace empregos.Controllers
             
             var temAcesso = (from user in db.usuario where user.email == login && user.senha == senhalogin select user.nome).ToList();
 
-            var ticket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(1,temAcesso[0],DateTime.Now,DateTime.Now.AddHours(12),true,"ADM"));
+            //var ticket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(1,temAcesso[0],DateTime.Now,DateTime.Now.AddHours(12),true,"ADM"));
 
-            var coockie = new HttpCookie(FormsAuthentication.FormsCookieName, ticket);
-            Response.Cookies.Add(coockie);
+            //var coockie = new HttpCookie(FormsAuthentication.FormsCookieName, ticket);
+            //Response.Cookies.Add(coockie);
 
             if (temAcesso.Count() == 0)
             {
@@ -38,10 +38,48 @@ namespace empregos.Controllers
             }
             else
             {
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("CreateUsuario", "Login");
             }
 
             return Json(new { Success = true, nomeLogin = temAcesso[0] });
+        }
+
+        public ActionResult CreateUsuario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateUsuario(usuario usuario)
+        {
+            usuario NewUser = new usuario();
+            empregotccEntities1 db = new empregotccEntities1();
+
+            try
+            {
+                NewUser.nome = usuario.nome;
+                NewUser.bairro = usuario.bairro;
+                NewUser.cep = usuario.cep;
+                NewUser.cidade = usuario.cidade;
+                NewUser.cpf = usuario.cpf;
+                NewUser.dataNascimento = usuario.dataNascimento;
+                NewUser.email = usuario.email;
+                NewUser.estado = usuario.estado;
+                NewUser.perfil = "ADM";
+                NewUser.rua = usuario.rua;
+                NewUser.senha = usuario.senha;
+                NewUser.telefone = usuario.telefone;
+                NewUser.telefone2 = usuario.telefone2;
+
+                db.usuario.Add(NewUser);
+                db.SaveChanges();
+
+            }
+            catch
+            {
+
+            }
+            return View();
         }
     }
 }
