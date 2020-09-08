@@ -196,6 +196,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\anuncio.cs">
+      <DependentUpon>db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\categoria.cs">
+      <DependentUpon>db.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\db.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -375,7 +381,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Login\login.cshtml" />
+    <Content Include="Views\Login\Home.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Scripts\vendor\bootstrap\css\bootstrap-grid.css.map" />
     <Content Include="Scripts\vendor\bootstrap\css\bootstrap-grid.min.css.map" />

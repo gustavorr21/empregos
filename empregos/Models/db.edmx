@@ -5,6 +5,27 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="empregotccModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="anuncio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="text" Nullable="false" />
+          <Property Name="preco" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="medida" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idCategoria" Type="int" Nullable="false" />
+          <Property Name="foto1" Type="blob" />
+          <Property Name="foto2" Type="blob" />
+        </EntityType>
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="text" Nullable="false" />
+          <Property Name="titulo" Type="text" Nullable="false" />
+        </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="id" />
@@ -24,14 +45,72 @@
           <Property Name="perfil" Type="varchar" MaxLength="45" />
           <Property Name="dataNascimento" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
+        <Association Name="idCategoria">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="1" />
+          <End Role="anuncio" Type="Self.anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="anuncio">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idUsuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="anuncio" Type="Self.anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="anuncio">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="empregotccModelStoreContainer">
+          <EntitySet Name="anuncio" EntityType="Self.anuncio" Schema="empregotcc" store:Type="Tables" />
+          <EntitySet Name="categoria" EntityType="Self.categoria" Schema="empregotcc" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="empregotcc" store:Type="Tables" />
+          <AssociationSet Name="idCategoria" Association="Self.idCategoria">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="anuncio" EntitySet="anuncio" />
+          </AssociationSet>
+          <AssociationSet Name="idUsuario" Association="Self.idUsuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="anuncio" EntitySet="anuncio" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="empregotccModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="anuncio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="preco" Type="Decimal" Nullable="false" />
+          <Property Name="medida" Type="Decimal" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idCategoria" Type="Int32" Nullable="false" />
+          <Property Name="foto1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="foto2" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="categoria" Relationship="Self.idCategoria" FromRole="anuncio" ToRole="categoria" />
+          <NavigationProperty Name="usuario" Relationship="Self.idUsuario" FromRole="anuncio" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="anuncio" Relationship="Self.idCategoria" FromRole="categoria" ToRole="anuncio" />
+        </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="id" />
@@ -50,16 +129,74 @@
           <Property Name="senha" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="perfil" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="dataNascimento" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="anuncio" Relationship="Self.idUsuario" FromRole="usuario" ToRole="anuncio" />
         </EntityType>
-        <EntityContainer Name="empregotccEntities1" annotation:LazyLoadingEnabled="true">
+        <Association Name="idCategoria">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="1" />
+          <End Role="anuncio" Type="Self.anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="anuncio">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idUsuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="anuncio" Type="Self.anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="anuncio">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="empregotccEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="anuncio" EntityType="Self.anuncio" />
+          <EntitySet Name="categoria" EntityType="Self.categoria" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="idCategoria" Association="Self.idCategoria">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="anuncio" EntitySet="anuncio" />
+          </AssociationSet>
+          <AssociationSet Name="idUsuario" Association="Self.idUsuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="anuncio" EntitySet="anuncio" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="empregotccModelStoreContainer" CdmEntityContainer="empregotccEntities1">
+        <EntityContainerMapping StorageEntityContainer="empregotccModelStoreContainer" CdmEntityContainer="empregotccEntities2">
+          <EntitySetMapping Name="anuncio">
+            <EntityTypeMapping TypeName="empregotccModel.anuncio">
+              <MappingFragment StoreEntitySet="anuncio">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="medida" ColumnName="medida" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="foto1" ColumnName="foto1" />
+                <ScalarProperty Name="foto2" ColumnName="foto2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categoria">
+            <EntityTypeMapping TypeName="empregotccModel.categoria">
+              <MappingFragment StoreEntitySet="categoria">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="usuario">
             <EntityTypeMapping TypeName="empregotccModel.usuario">
               <MappingFragment StoreEntitySet="usuario">

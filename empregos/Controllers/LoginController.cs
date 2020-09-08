@@ -18,30 +18,33 @@ namespace empregos.Controllers
             return View();
         }
 
-
-        public ActionResult login(string login, string senhalogin)
+        public ActionResult Home()
         {
-            empregotccEntities1 db = new empregotccEntities1();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult login(string ReturnUrl, usuario usuario)
+        {
+            empregotccEntities2 db = new empregotccEntities2();
 
             var nomeLogin = "";
-            
-            var temAcesso = (from user in db.usuario where user.email == login && user.senha == senhalogin select user.nome).ToList();
+
+            var temAcesso = db.usuario.Where(p => p.email.Equals(usuario.email) && p.senha.Equals(usuario.senha)).FirstOrDefault();
 
             //var ticket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(1,temAcesso[0],DateTime.Now,DateTime.Now.AddHours(12),true,"ADM"));
 
             //var coockie = new HttpCookie(FormsAuthentication.FormsCookieName, ticket);
             //Response.Cookies.Add(coockie);
 
-            if (temAcesso.Count() == 0)
+            if (temAcesso == null)
             {
                 return Json(new { Success = false, Response = "Login inexistente" });
             }
             else
             {
-                return RedirectToAction("CreateUsuario", "Login");
+                return RedirectToAction("Index", "Home");
             }
-
-            return Json(new { Success = true, nomeLogin = temAcesso[0] });
         }
 
         public ActionResult CreateUsuario()
@@ -53,27 +56,35 @@ namespace empregos.Controllers
         public ActionResult CreateUsuario(usuario usuario)
         {
             usuario NewUser = new usuario();
-            empregotccEntities1 db = new empregotccEntities1();
+            empregotccEntities2 db = new empregotccEntities2();
+
+            var pegaEmailCPF = db.usuario.Where(p => p.email.Equals(usuario.email) || p.cpf.Equals(usuario.cpf)).FirstOrDefault();
 
             try
             {
-                NewUser.nome = usuario.nome;
-                NewUser.bairro = usuario.bairro;
-                NewUser.cep = usuario.cep;
-                NewUser.cidade = usuario.cidade;
-                NewUser.cpf = usuario.cpf;
-                NewUser.dataNascimento = usuario.dataNascimento;
-                NewUser.email = usuario.email;
-                NewUser.estado = usuario.estado;
-                NewUser.perfil = "ADM";
-                NewUser.rua = usuario.rua;
-                NewUser.senha = usuario.senha;
-                NewUser.telefone = usuario.telefone;
-                NewUser.telefone2 = usuario.telefone2;
+                if (pegaEmailCPF != null)
+                {
+                    return Json(new { Success = false, Response = "Email ja cadastrado" });
+                }
+                else
+                {
+                    NewUser.nome = usuario.nome;
+                    NewUser.bairro = usuario.bairro;
+                    NewUser.cep = usuario.cep;
+                    NewUser.cidade = usuario.cidade;
+                    NewUser.cpf = usuario.cpf;
+                    NewUser.dataNascimento = usuario.dataNascimento;
+                    NewUser.email = usuario.email;
+                    NewUser.estado = usuario.estado;
+                    NewUser.perfil = "ADM";
+                    NewUser.rua = usuario.rua;
+                    NewUser.senha = usuario.senha;
+                    NewUser.telefone = usuario.telefone;
+                    NewUser.telefone2 = usuario.telefone2;
 
-                db.usuario.Add(NewUser);
-                db.SaveChanges();
-
+                    db.usuario.Add(NewUser);
+                    db.SaveChanges();
+                }
             }
             catch
             {

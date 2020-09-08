@@ -1,110 +1,70 @@
-﻿
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    
-    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
-    <!--===============================================================================================-->
+﻿@model empregos.Models.ViewModels.usuarioViewModel
+@{
+    Layout = null;
+}
 
-    @*<link rel="stylesheet" type="text/css" href="~/Scripts/vendor/bootstrap/css/bootstrap.min.css">*@
-    <!--===============================================================================================-->
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/devmedia_estilo.css" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
+<script src="~/scripts/jquery-1.10.2.js"></script>
+<script src="~/scripts/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/animate/animate.css">
-    <!--===============================================================================================-->
+@using (Html.BeginForm("login", "Login", new { ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post,
+new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken();
 
-    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/css-hamburgers/hamburgers.min.css">
-    <!--===============================================================================================-->
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/util.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/main.css">
-    <!--===============================================================================================-->
-</head>
-<body>
-
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <div class="login100-pic js-tilt" data-tilt>
-                    <img src="~/images/img-01.png" alt="IMG">
+    <div class="container">
+        <div class="form-login">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">Login do Sistema</div>
                 </div>
 
-                <form class="login100-form validate-form">
-                    <span class="login100-form-title">
-                        Member Login
-                    </span>
+                <div style="padding-top:30px" class="panel-body">
+                    <div style="display:none" id="result" class="alert
+                    alert-danger col-sm-12">
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="login" id="login" placeholder="Email">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon
+                        glyphicon-user"></i>
                         </span>
+                        @Html.EditorFor(model => model.email, new { htmlAttributes =
+                        new { @class = "form-control input-lg", placeholder =
+                        "E-mail", autofocus = true } })
+                        @Html.ValidationMessageFor(model => model.email, "",
+                        new { @class = "text-danger" })
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="senha" id="senha" placeholder="Password">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon
+                        glyphicon-lock"></i>
                         </span>
+                        @Html.EditorFor(model => model.senha, new { htmlAttributes
+                        = new { @class = "form-control input-lg", placeholder = "Senha" } })
+                        @Html.ValidationMessageFor(model => model.senha, "",
+                        new { @class = "text-danger" })
                     </div>
 
-                    <div class="container-login100-form-btn">
-                        <button onclick="loginteste()" class="login100-form-btn">
-                            Login
-                        </button>
-                    </div>
+                    <div style="margin-top:10px" class="form-group">
 
-                    <div class="text-center p-t-12">
-                        <span class="txt1">
-                            Forgot
-                        </span>
-                        <a class="txt2" href="#">
-                            Username / Password?
-                        </a>
-                    </div>
+                        <div class="col-sm-12 controls">
+                            <input type="submit" value="Acessar"
+                                   class="btn primary btn-lg" />
+                        </div>
 
-                    <div class="text-center p-t-136">
-                        <a class="txt2" href="~/Login/CreateUsuario">
-                            Create your Account
-                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                        </a>
+                        <div class="col-sm-12 controls">
+                            <a  href="~/Login/CreateUsuario" class="btn primary btn-lg"> Cadastrede</a>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-
-
-
-
-    <!--===============================================================================================-->
-    
-    <script src="~/Scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <!--===============================================================================================-->
-
-    <script src="~/Scripts/vendor/bootstrap/js/popper.js"></script>
-    <script src="~/Scripts/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!--===============================================================================================-->
-
-    <script src="~/Scripts/vendor/select2/select2.min.js"></script>
-    <!--===============================================================================================-->
-
-    <script src="~/Scripts/vendor/tilt/tilt.jquery.min.js"></script>
-    <script>
-        $('.js-tilt').tilt({
-            scale: 1.1
-        })
-    </script>
-    <!--===============================================================================================-->
-    <script src="~/Scripts/js/main.js"></script>
-
-</body>
-
-<script src="~/Scripts/Login/login.js"></script>
+}

@@ -13,10 +13,10 @@ namespace empregos.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class empregotccEntities1 : DbContext
+    public partial class empregotccEntities2 : DbContext
     {
-        public empregotccEntities1()
-            : base("name=empregotccEntities1")
+        public empregotccEntities2()
+            : base("name=empregotccEntities2")
         {
         }
     
@@ -25,6 +25,8 @@ namespace empregos.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<anuncio> anuncio { get; set; }
+        public virtual DbSet<categoria> categoria { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
     }
 }
