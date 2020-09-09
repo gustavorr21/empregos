@@ -191,6 +191,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AnuncioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -220,6 +221,8 @@
     <Compile Include="Models\usuario.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\AnuncioViewModel.cs" />
+    <Compile Include="Models\ViewModels\categoriaViewModel.cs" />
     <Compile Include="Models\ViewModels\usuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -390,6 +393,7 @@
     <Content Include="Scripts\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Scripts\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="Views\Login\CreateUsuario.cshtml" />
+    <Content Include="Views\Anuncio\CreateAnuncio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

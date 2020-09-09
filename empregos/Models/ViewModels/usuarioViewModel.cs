@@ -64,5 +64,7 @@ namespace empregos.Models.ViewModels
         [Required]
         public DateTime dataNascimento { get; set; }
 
+        public List<AnuncioViewModel> anuncio { get; set; }
+
     }
 }

@@ -58,13 +58,18 @@ namespace empregos.Controllers
             usuario NewUser = new usuario();
             empregotccEntities2 db = new empregotccEntities2();
 
-            var pegaEmailCPF = db.usuario.Where(p => p.email.Equals(usuario.email) || p.cpf.Equals(usuario.cpf)).FirstOrDefault();
+            var pegaEmail = db.usuario.Where(p => p.email.Equals(usuario.email)).FirstOrDefault();
+            var pegaCPF = db.usuario.Where(p => p.email.Equals(usuario.email)).FirstOrDefault();
 
             try
             {
-                if (pegaEmailCPF != null)
+                if (pegaEmail != null )
                 {
                     return Json(new { Success = false, Response = "Email ja cadastrado" });
+                }
+                else if (pegaCPF != null)
+                {
+                    return Json(new { Success = false, Response = "CPF ja cadastrado" });
                 }
                 else
                 {
