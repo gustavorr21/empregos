@@ -28,9 +28,13 @@
                 grid.Column(columnName: "preco", header: "Preço"),
                 grid.Column(columnName: "medida", header: "medida"),
                 grid.Column(columnName: "idUsuario", header: "idusuario"),
-                grid.Column(columnName: "idcategoria", header: "idcategoria")
+                grid.Column(columnName: "idcategoria", header: "idcategoria"),
+                grid.Column(format:@<input type="button" onclick="Editar()" value="Editar" />, header: "editar"),
+                grid.Column(format:@<input type="button" onclick="Excluir()" value="Excluir" />, header: "Exclusão")
+
         @*grid.Column(header:"Fechado?", format:@<text><input type="checkbox" checked="@item.Closed" disabled="disabled" /></text>),*@
-              //grid.Column(columnName: "DataClosed", header: "Realizado em:")
-              )
-            )
+        //grid.Column(columnName: "DataClosed", header: "Realizado em:")
+        )
+      )
+
 </div>
