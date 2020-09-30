@@ -15,8 +15,8 @@
           <Property Name="medida" Type="decimal" Precision="10" Scale="0" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="idCategoria" Type="int" Nullable="false" />
-          <Property Name="foto1" Type="blob" />
-          <Property Name="foto2" Type="blob" />
+          <Property Name="foto1" Type="varchar" MaxLength="150" />
+          <Property Name="foto2" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="categoria">
           <Key>
@@ -97,8 +97,8 @@
           <Property Name="medida" Type="Decimal" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <Property Name="idCategoria" Type="Int32" Nullable="false" />
-          <Property Name="foto1" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="foto2" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="foto1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="foto2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="categoria" Relationship="Self.idCategoria" FromRole="anuncio" ToRole="categoria" />
           <NavigationProperty Name="usuario" Relationship="Self.idUsuario" FromRole="anuncio" ToRole="usuario" />
         </EntityType>
@@ -155,7 +155,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="empregotccEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="empregotccEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="anuncio" EntityType="Self.anuncio" />
           <EntitySet Name="categoria" EntityType="Self.categoria" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
@@ -173,7 +173,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="empregotccModelStoreContainer" CdmEntityContainer="empregotccEntities2">
+        <EntityContainerMapping StorageEntityContainer="empregotccModelStoreContainer" CdmEntityContainer="empregotccEntities3">
           <EntitySetMapping Name="anuncio">
             <EntityTypeMapping TypeName="empregotccModel.anuncio">
               <MappingFragment StoreEntitySet="anuncio">

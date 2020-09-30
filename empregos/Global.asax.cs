@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Security.Principal;
+using empregos.Mappers;
 
 namespace empregos
 {
@@ -18,6 +19,8 @@ namespace empregos
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfig.RegisterMappings();
+
         }
 
         protected void Aplication_AuthenticateRequest(Object sender, EventArgs e)

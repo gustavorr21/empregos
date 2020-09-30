@@ -18,15 +18,10 @@ namespace empregos.Controllers
             return View();
         }
 
-        public ActionResult Home()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult login(string ReturnUrl, usuario usuario)
+        public ActionResult Home(usuario usuario)
         {
-            empregotccEntities2 db = new empregotccEntities2();
+            empregotccEntities3 db = new empregotccEntities3();
 
             var nomeLogin = "";
 
@@ -36,13 +31,38 @@ namespace empregos.Controllers
 
             //var coockie = new HttpCookie(FormsAuthentication.FormsCookieName, ticket);
             //Response.Cookies.Add(coockie);
-
             if (temAcesso == null)
             {
                 return Json(new { Success = false, Response = "Login inexistente" });
             }
             else
             {
+                Session["LoginID"] = temAcesso.id;
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult login(string ReturnUrl, usuario usuario)
+        {
+            empregotccEntities3 db = new empregotccEntities3();
+
+            var nomeLogin = "";
+
+            var temAcesso = db.usuario.Where(p => p.email.Equals(usuario.email) && p.senha.Equals(usuario.senha)).FirstOrDefault();
+
+            //var ticket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(1,temAcesso[0],DateTime.Now,DateTime.Now.AddHours(12),true,"ADM"));
+
+            //var coockie = new HttpCookie(FormsAuthentication.FormsCookieName, ticket);
+            //Response.Cookies.Add(coockie);
+            if (temAcesso == null)
+            {
+                return Json(new { Success = false, Response = "Login inexistente" });
+            }
+            else
+            {
+                ViewData["NomeUsuarioteste"] = temAcesso.nome;
+                ViewBag.NomeUsuario = temAcesso.nome;
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -56,7 +76,7 @@ namespace empregos.Controllers
         public ActionResult CreateUsuario(usuario usuario)
         {
             usuario NewUser = new usuario();
-            empregotccEntities2 db = new empregotccEntities2();
+            empregotccEntities3 db = new empregotccEntities3();
 
             var pegaEmail = db.usuario.Where(p => p.email.Equals(usuario.email)).FirstOrDefault();
             var pegaCPF = db.usuario.Where(p => p.email.Equals(usuario.email)).FirstOrDefault();
@@ -95,7 +115,7 @@ namespace empregos.Controllers
             {
 
             }
-            return View();
+            return RedirectToAction("","");
         }
     }
 }

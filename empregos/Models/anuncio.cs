@@ -20,9 +20,9 @@ namespace empregos.Models
         public Nullable<decimal> medida { get; set; }
         public int idUsuario { get; set; }
         public int idCategoria { get; set; }
-        public byte[] foto1 { get; set; }
-        public byte[] foto2 { get; set; }
-    
+        public string foto1 { get; set; }
+        public string foto2 { get; set; }
+        
         public virtual categoria categoria { get; set; }
         public virtual usuario usuario { get; set; }
     }

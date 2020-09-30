@@ -1,7 +1,6 @@
-﻿// cadastrar FIR
+﻿// cadastrar
 $(function () {
     /// <summary>
-    /// função que detecta o post do formulario e realiza a gravação de um registro FIR.
     /// </summary>
     $('form').submit(function () {
 

@@ -6,6 +6,7 @@ using System.Web;
 
 namespace empregos.Models.ViewModels
 {
+    [Serializable]
     public class usuarioViewModel
     {
         public int id { get; set; }
@@ -32,23 +33,23 @@ namespace empregos.Models.ViewModels
         public string telefone2 { get; set; }
 
         [Display(Name = "CEP")]
-        [Required(ErrorMessage = "O nome do usuário é obrigatório", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "O nome do cep é obrigatório", AllowEmptyStrings = false)]
         public int cep { get; set; }
 
         [Display(Name = "Rua")]
-        [Required(ErrorMessage = "O nome do usuário é obrigatório", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "O nome da rua é obrigatório", AllowEmptyStrings = false)]
         public string rua { get; set; }
 
         [Display(Name = "Bairro")]
-        [Required(ErrorMessage = "O nome do usuário é obrigatório", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "O nome do bairro é obrigatório", AllowEmptyStrings = false)]
         public string bairro { get; set; }
 
         [Display(Name = "Cidade")]
-        [Required(ErrorMessage = "O nome do usuário é obrigatório", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "O nome da cidade é obrigatório", AllowEmptyStrings = false)]
         public string cidade { get; set; }
 
         [Display(Name = "Estado")]
-        [Required(ErrorMessage = "O nome do usuário é obrigatório", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "O nome do estado é obrigatório", AllowEmptyStrings = false)]
         public string estado { get; set; }
 
         [Required]

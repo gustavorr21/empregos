@@ -13,10 +13,10 @@ namespace empregos.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class empregotccEntities2 : DbContext
+    public partial class empregotccEntities3 : DbContext
     {
-        public empregotccEntities2()
-            : base("name=empregotccEntities2")
+        public empregotccEntities3()
+            : base("name=empregotccEntities3")
         {
         }
     
