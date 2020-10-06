@@ -16,25 +16,66 @@
     }
 </style>
 <h2>Listando tarefas com o WebGrid</h2>
-<div id="webgrid">
-    @grid.GetHtml(
-      tableStyle: "table table-responsive table-striped table-bordered table-hover ",
-      headerStyle: "wedgrid-header",
-      footerStyle: "",
-      rowStyle: "webgrid-row-style",
-      columns: grid.Columns(
-        grid.Column(columnName: "id", header: "Id"),
-                grid.Column(columnName: "descricao", header: "descricao"),
-                grid.Column(columnName: "preco", header: "Preço"),
-                grid.Column(columnName: "medida", header: "medida"),
-                grid.Column(columnName: "idUsuario", header: "idusuario"),
-                grid.Column(columnName: "idcategoria", header: "idcategoria"),
-                grid.Column(format:@<input type="button" onclick="Editar()" value="Editar" />, header: "editar"),
-                grid.Column(format:@<input type="button" onclick="Excluir()" value="Excluir" />, header: "Exclusão")
 
-        @*grid.Column(header:"Fechado?", format:@<text><input type="checkbox" checked="@item.Closed" disabled="disabled" /></text>),*@
-        //grid.Column(columnName: "DataClosed", header: "Realizado em:")
-        )
-      )
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Preço</th>
+            <th scope="col">medida</th>
+            <th scope="col">categoria</th>
+            <th scope="col">foto</th>
+            <th scope="col">foto</th>
+            <th scope="col">Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var anunusuario in Model)
+        {
+            <tr>
+                <th scope="row">@anunusuario.id</th>
+                <td>@anunusuario.descricao</td>
+                <td>@anunusuario.preco</td>
+                <td>@anunusuario.medida</td>
+                <td>@anunusuario.idCategoria</td>
+                <td>@anunusuario.foto1</td>
+                <td>@anunusuario.foto2</td>
+                <td><input type="button" value="editar" onclick="Edit(@anunusuario.id)" /> </td>
+                <td><input type="button" value="Excluir"></td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/anuncio/EditAnuncio.js"></script>
+}
+
+
+
+
+
+@*<div id="webgrid">
+        @grid.GetHtml(
+          tableStyle: "table table-responsive table-striped table-bordered table-hover ",
+          headerStyle: "wedgrid-header",
+          footerStyle: "",
+          rowStyle: "webgrid-row-style",
+          columns: grid.Columns(
+            grid.Column(columnName: "id", header: "Id"),
+                    grid.Column(columnName: "descricao", header: "descricao"),
+                    grid.Column(columnName: "preco", header: "Preço"),
+                    grid.Column(columnName: "medida", header: "medida"),
+                    grid.Column(columnName: "idUsuario", header: "idusuario"),
+                    grid.Column(columnName: "idcategoria", header: "idcategoria"),
+                    grid.Column(format:@<input type="button" onclick="Editar()" value="Editar" />, header: "Editar"),
+                    grid.Column(format:@<input type="button" onclick="Excluir()" value="Excluir" />, header: "Exclusão")
+
+            grid.Column(header:"Fechado?", format:@<text><input type="checkbox" checked="@item.Closed" disabled="disabled" /></text>),
+            //grid.Column(columnName: "DataClosed", header: "Realizado em:")
+            )
+          )
+
+    </div>*@

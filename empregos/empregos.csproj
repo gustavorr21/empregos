@@ -280,6 +280,7 @@
       <LastGenOutput>db.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\anuncio\anunciocreate.js" />
+    <Content Include="Scripts\anuncio\EditAnuncio.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
@@ -419,6 +420,7 @@
     <Content Include="Views\Anuncio\CreateAnuncio.cshtml" />
     <Content Include="Views\Anuncio\EditAnuncio.cshtml" />
     <Content Include="Views\Anuncio\ExibeAllAnuncios.cshtml" />
+    <Content Include="Views\Anuncio\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

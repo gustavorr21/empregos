@@ -66,5 +66,14 @@ namespace empregos.Controllers
             var anunciolista = Mapper.Map<List<anuncio>, List<AnuncioViewModel>>(anun);
             return View(anun);
         }
+
+        public ActionResult Edit(int id)
+        {
+            anuncio anun = new anuncio();
+            anun = db.anuncio.Where(x => x.id == id).FirstOrDefault();
+            var anunciolista = Mapper.Map<anuncio, AnuncioViewModel>(anun);
+
+            return View(anunciolista);
+        }
     }
 }
