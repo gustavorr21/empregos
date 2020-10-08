@@ -72,8 +72,15 @@ namespace empregos.Controllers
             anuncio anun = new anuncio();
             anun = db.anuncio.Where(x => x.id == id).FirstOrDefault();
             var anunciolista = Mapper.Map<anuncio, AnuncioViewModel>(anun);
-
+            anunciolista.cat = db.categoria.AsQueryable().Where(x => x.id != 0).FirstOrDefault();
+            
             return View(anunciolista);
+        }
+
+        public ActionResult EditarAnuncioEscolhido(AnuncioViewModel anuncio)
+        {
+
+            return Json(new { Success = true });
         }
     }
 }

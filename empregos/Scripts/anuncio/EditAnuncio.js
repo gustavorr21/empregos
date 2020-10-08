@@ -1,29 +1,24 @@
 ﻿
-function Edit(id) {
 
+function Edit(id) {
+    var url = '/Anuncio/Edit/' + id;
+    window.location = url;
     $.ajax({
         url: '/Anuncio/Edit/' + id,
         type: 'POST',
         data: { id: id},
         success: function (result) {
-            var url = '/Anuncio/Edit/' + id;
+           
             debugger;
             if (!result.Success) {
                 swal(result.Response, "", "error");
                 return false;
             }
             else {
-                window.location = url;
             }
         }
     });
 };
-
-
-
-
-
-
 
 function EditarAnuncioSave() {
 
@@ -59,6 +54,64 @@ function pegaDadosReturn() {
         'descricao': $('#descricao').val(),
         'preco': $('#preco').val(),
         'medida': $('#medida').val()
+    };
+
+    return returnDados;
+}
+
+// editar
+function editarAnun() {
+    /// <summary>
+    /// </summary>
+    var model = pegaDadosReturnEditar();
+    var msg = "Deseja realmente editar este anuncio?";
+    swal({
+        title: msg,
+        text: "",
+        icon: "warning",
+        buttons: ["Não", "Sim"],
+        dangerMode: true,
+    })
+        .then(
+            (willAdd) => {
+
+                if (!willAdd) {
+                    return;
+                }
+                else {
+
+                    $.ajax({
+                        url: '/Anuncio/EditarAnuncioEscolhido',
+                        type: 'POST',
+                        data: { anuncio : model},
+                        success: function (result) {
+                            var url = '/Anuncio/EditAnuncio';
+
+                            if (!result.Success) {
+                                swal(result.Response, "", "error");
+                                return false;
+                            }
+                            else {
+                                swal("Anuncio editado com sucesso.", "", "success")
+                                    .then(() => {
+                                        window.location = url;
+                                    });
+                            }
+                        }
+                    });
+                }
+            });
+
+};
+
+function pegaDadosReturnEditar() {
+    var returnDados;
+    returnDados = {
+        'id': $('#id').val(),
+        'descricao': $('#descricao').val(),
+        'preco': $('#preco').val(),
+        'medida': $('#medida').val(),
+        'foto1': $('#foto1').val()
     };
 
     return returnDados;

@@ -115,7 +115,7 @@ namespace empregos.Controllers
             {
 
             }
-            return RedirectToAction("","");
+            return Json(new { Success = true });
         }
     }
 }

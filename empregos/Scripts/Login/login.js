@@ -6,25 +6,44 @@ $(function () {
 
         if ($(this).valid()) {
 
-            $.ajax({
-                url: '/Login/CreateUsuario',
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function (result) {
-                    var url = '/Login/login';
-                    debugger;
-                    if (!result.Success) {
-                        swal(result.Response, "", "error");
-                        return false;
-                    }
-                    else {
-                        swal("Usuario cadastrado com sucesso.", "", "success")
-                            .then(function () {
-                                window.location = url;
+            var msg = "Deseja realmente criar este usuario?";
+            swal({
+                title: msg,
+                text: "",
+                icon: "warning",
+                buttons: ["Não", "Sim"],
+                dangerMode: true,
+            })
+                .then(
+                    (willAdd) => {
+
+                        if (!willAdd) {
+                            return;
+                        }
+                        else {
+
+                            $.ajax({
+                                url: '/Login/CreateUsuario',
+                                type: 'POST',
+                                data: $(this).serialize(),
+                                success: function (result) {
+                                    var url = '/Home/Index';
+                                    debugger;
+                                    if (!result.Success) {
+                                        swal(result.Response, "", "error");
+                                        return false;
+                                    }
+                                    else {
+                                        swal("Usuario cadastrado com sucesso.", "", "success")
+                                            .then(function () {
+                                                window.location = url;
+                                            });
+                                    }
+                                }
                             });
-                    }
-                }
-            });
+                        }
+                    });
+
         }
         return false;
     });
@@ -68,7 +87,6 @@ function DadosLoginObrigatorio(login, senhalogin) {
     }
     return true;
 };
-
 
 
 

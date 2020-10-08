@@ -14,4 +14,39 @@
 {
     @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
     @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
+
+    @Html.LabelFor(model => model.cat.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.cat.descricao, new { htmlAttributes = new { @class = "form-control" } })
+
+
+    @Html.LabelFor(model => model.medida, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.medida, new { htmlAttributes = new { @class = "form-control" } })
+
+    @Html.LabelFor(model => model.usuario.nome, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.usuario.nome, new { htmlAttributes = new { @class = "form-control" } })
+
+    @Html.LabelFor(model => model.preco, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.preco, new { htmlAttributes = new { @class = "form-control" } })
+
+    @Html.LabelFor(model => model.foto1, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.foto1, new { htmlAttributes = new { @class = "form-control" } })
+
+    <input value="Editar" type="button" onclick="editarAnun()" class="form-control"/>
 }
+
+<style scoped>
+
+    textarea {
+        min-width: 100%;
+    }
+
+    .form-horizontal .control-label {
+        text-align: left !important;
+    }
+</style>
+
+
+@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/anuncio/EditAnuncio.js"></script>
+    }
