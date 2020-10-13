@@ -73,14 +73,50 @@ namespace empregos.Controllers
             anun = db.anuncio.Where(x => x.id == id).FirstOrDefault();
             var anunciolista = Mapper.Map<anuncio, AnuncioViewModel>(anun);
             anunciolista.cat = db.categoria.AsQueryable().Where(x => x.id != 0).FirstOrDefault();
-            
+            Session["categoria"] = new SelectList(db.categoria, "id", "titulo");
             return View(anunciolista);
         }
 
         public ActionResult EditarAnuncioEscolhido(AnuncioViewModel anuncio)
         {
+            try
+            {
+                AnuncioViewModel anuncioUpdate = new AnuncioViewModel();
 
-            return Json(new { Success = true });
+                anuncio anunEditar = db.anuncio.FirstOrDefault(x=>x.id == anuncio.id);
+
+                anunEditar.descricao = anuncio.descricao;
+                anunEditar.idCategoria = anuncio.idcategoria;
+                anunEditar.idUsuario = anuncio.idUsuario;
+                anunEditar.medida = anuncio.medida;
+                anunEditar.preco = anuncio.preco;
+                anunEditar.foto1 = anuncio.foto1;
+                anunEditar.foto2 = anuncio.foto2;
+
+                db.SaveChanges();
+
+                return Json(new { Success = true });
+            }
+            catch
+            {
+                return Json(new { Success = false, Response = "Falha ao editar o registro" });
+            }
+        }
+
+        public ActionResult ExluirAnuncio(int id)
+        {
+            try
+            {
+                anuncio anunEditar = db.anuncio.FirstOrDefault(x => x.id == id);
+                db.anuncio.Remove(anunEditar);
+                db.SaveChanges();
+
+                return Json(new { Success = true });
+            }
+            catch
+            {
+                return Json(new { Success = false, Response = "Falha ao editar o registro" });
+            }
         }
     }
 }

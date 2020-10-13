@@ -1,7 +1,9 @@
 ﻿@model empregos.Models.ViewModels.AnuncioViewModel
 
 @{
-    ViewBag.Title = "Edit";
+                /**/
+
+                ViewBag.Title = "Edit";
 }
 
 <br />
@@ -12,26 +14,41 @@
 
 @using (Html.BeginForm())
 {
+    <input hidden="hidden" />
+    @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+    @Html.EditorFor(model => model.idUsuario, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+
     @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
     @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
 
-    @Html.LabelFor(model => model.cat.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-    @Html.EditorFor(model => model.cat.descricao, new { htmlAttributes = new { @class = "form-control" } })
+    <br />
+    @Html.LabelFor(model => model.cat.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.DropDownList("idcategoria", (SelectList)Session["categoria"], "Selecione...", new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.idcategoria, "", new { @class = "text-danger" })
 
+    <br />
 
     @Html.LabelFor(model => model.medida, htmlAttributes: new { @class = "control-label col-md-2" })
     @Html.EditorFor(model => model.medida, new { htmlAttributes = new { @class = "form-control" } })
 
+    <br />
     @Html.LabelFor(model => model.usuario.nome, htmlAttributes: new { @class = "control-label col-md-2" })
     @Html.EditorFor(model => model.usuario.nome, new { htmlAttributes = new { @class = "form-control" } })
 
+    <br />
     @Html.LabelFor(model => model.preco, htmlAttributes: new { @class = "control-label col-md-2" })
     @Html.EditorFor(model => model.preco, new { htmlAttributes = new { @class = "form-control" } })
 
+    <br />
     @Html.LabelFor(model => model.foto1, htmlAttributes: new { @class = "control-label col-md-2" })
-    @Html.EditorFor(model => model.foto1, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.EditorFor(model => model.foto1, new { htmlAttributes = new { @class = "form-control", @type = "file", id = "foto1", name = "foto1" } })
 
-    <input value="Editar" type="button" onclick="editarAnun()" class="form-control"/>
+    <br />
+    @Html.LabelFor(model => model.foto2, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.foto2, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+
+
+    <input value="Editar" type="button" onclick="editarAnun()" class="form-control btn-success" />
 }
 
 <style scoped>
@@ -47,6 +64,6 @@
 
 
 @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        <script src="~/Scripts/anuncio/EditAnuncio.js"></script>
-    }
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/anuncio/EditAnuncio.js"></script>
+}

@@ -31,18 +31,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var anunusuario in Model)
+        @foreach (var anuncio in Model)
         {
             <tr>
-                <th scope="row">@anunusuario.id</th>
-                <td>@anunusuario.descricao</td>
-                <td>@anunusuario.preco</td>
-                <td>@anunusuario.medida</td>
-                <td>@anunusuario.idCategoria</td>
-                <td>@anunusuario.foto1</td>
-                <td>@anunusuario.foto2</td>
-                <td><input type="button" value="editar" onclick="Edit(@anunusuario.id)" /> </td>
-                <td><input type="button" value="Excluir"></td>
+                <th scope="row">@anuncio.id</th>
+                <td>@anuncio.descricao</td>
+                <td>@anuncio.preco</td>
+                <td>@anuncio.medida</td>
+                <td>@anuncio.idCategoria</td>
+                <td>@anuncio.foto1</td>
+                <td>@anuncio.foto2</td>
+                <td><input type="button" value="editar" onclick="Edit(@anuncio.id)" /> </td>
+                <td><input type="button" value="Excluir" onclick="Excluir(@anuncio.id)" ></td>
             </tr>
         }
     </tbody>

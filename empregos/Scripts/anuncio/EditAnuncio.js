@@ -111,8 +111,55 @@ function pegaDadosReturnEditar() {
         'descricao': $('#descricao').val(),
         'preco': $('#preco').val(),
         'medida': $('#medida').val(),
-        'foto1': $('#foto1').val()
+        'idUsuario': $('#idUsuario').val(),
+        'foto1': $('#foto1').val(), 
+        'idcategoria': $('#idcategoria').val()
     };
 
     return returnDados;
 }
+
+
+
+function Excluir(id) {
+
+    var msg = "Deseja realmente Excluir este anuncio?";
+    swal({
+        title: msg,
+        text: "",
+        icon: "warning",
+        buttons: ["Não", "Sim"],
+        dangerMode: true,
+    })
+        .then(
+            (willAdd) => {
+
+                if (!willAdd) {
+                    return;
+                }
+                else {
+
+                    $.ajax({
+                        url: '/Anuncio/ExluirAnuncio',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (result) {
+                            var url = '/Anuncio/EditAnuncio';
+
+                            if (!result.Success) {
+                                swal(result.Response, "", "error");
+                                return false;
+                            }
+                            else {
+                                swal("Anuncio excluido com sucesso.", "", "success")
+                                    .then(() => {
+                                        window.location = url;
+                                    });
+                            }
+                        }
+                    });
+                }
+            });
+
+};
+
