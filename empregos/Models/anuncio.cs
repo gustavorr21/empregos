@@ -22,7 +22,7 @@ namespace empregos.Models
         public int idCategoria { get; set; }
         public string foto1 { get; set; }
         public string foto2 { get; set; }
-        
+    
         public virtual categoria categoria { get; set; }
         public virtual usuario usuario { get; set; }
     }

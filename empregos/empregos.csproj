@@ -242,10 +242,10 @@
     <Compile Include="Mappers\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Mappers\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Models\anuncio.cs">
-      <DependentUpon>db.tt</DependentUpon>
+      <DependentUpon>dbLocal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\categoria.cs">
-      <DependentUpon>db.tt</DependentUpon>
+      <DependentUpon>dbLocal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\db.Context.cs">
       <AutoGen>True</AutoGen>
@@ -262,8 +262,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>db.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\dbLocal.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbLocal.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbLocal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbLocal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbLocal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbLocal.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\usuario.cs">
-      <DependentUpon>db.tt</DependentUpon>
+      <DependentUpon>dbLocal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\AnuncioViewModel.cs" />
     <Compile Include="Models\ViewModels\categoriaViewModel.cs" />
@@ -307,6 +322,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>db.edmx</DependentUpon>
       <LastGenOutput>db.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\dbLocal.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbLocal.edmx</DependentUpon>
+      <LastGenOutput>dbLocal.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\dbLocal.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbLocal.edmx</DependentUpon>
+      <LastGenOutput>dbLocal.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\anuncio\anunciocreate.js" />
     <Content Include="Scripts\anuncio\EditAnuncio.js" />
@@ -393,6 +418,13 @@
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
+    <EntityDeploy Include="Models\dbLocal.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbLocal.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\dbLocal.edmx.diagram">
+      <DependentUpon>dbLocal.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
@@ -405,6 +437,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\main.js" />
+    <Content Include="Scripts\Login\Logar.js" />
     <Content Include="Scripts\Login\login.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\sweetalert.min.js" />

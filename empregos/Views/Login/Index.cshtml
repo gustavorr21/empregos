@@ -1,13 +1,12 @@
 ﻿@model empregos.Models.ViewModels.usuarioViewModel
-@{
-    Layout = null;
-}
+
 
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/devmedia_estilo.css" rel="stylesheet" />
 
 <script src="~/scripts/jquery-1.10.2.js"></script>
 <script src="~/scripts/bootstrap.min.js"></script>
+
 
 @using (Html.BeginForm("Home", "Login", FormMethod.Post,
 new { @class = "form-horizontal" }))
@@ -60,11 +59,17 @@ new { @class = "form-horizontal" }))
                         </div>
 
                         <div class="col-sm-12 controls">
-                            <a  href="~/Login/CreateUsuario" class="btn primary btn-lg"> Cadastrese</a>
+                            <a href="~/Login/CreateUsuario" class="btn primary btn-lg"> Cadastrese</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Login/Logar.js"></script>
+}
+

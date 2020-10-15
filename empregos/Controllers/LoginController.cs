@@ -12,7 +12,7 @@ namespace empregos.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-
+        empregobdlocalEntities2 db = new empregobdlocalEntities2();
         public ActionResult Index()
         {
             return View();
@@ -21,7 +21,7 @@ namespace empregos.Controllers
         [HttpPost]
         public ActionResult Home(usuario usuario)
         {
-            empregotccEntities3 db = new empregotccEntities3();
+            
 
             var nomeLogin = "";
 
@@ -45,7 +45,7 @@ namespace empregos.Controllers
         [HttpPost]
         public ActionResult login(string ReturnUrl, usuario usuario)
         {
-            empregotccEntities3 db = new empregotccEntities3();
+            
 
             var nomeLogin = "";
 
@@ -63,7 +63,7 @@ namespace empregos.Controllers
             {
                 ViewData["NomeUsuarioteste"] = temAcesso.nome;
                 ViewBag.NomeUsuario = temAcesso.nome;
-                return RedirectToAction("Index", "Home");
+                return Json(new { Success = true, Response = "Login Ok" });
             }
         }
 
@@ -76,7 +76,7 @@ namespace empregos.Controllers
         public ActionResult CreateUsuario(usuario usuario)
         {
             usuario NewUser = new usuario();
-            empregotccEntities3 db = new empregotccEntities3();
+            
 
             var pegaEmail = db.usuario.Where(p => p.email.Equals(usuario.email)).FirstOrDefault();
             var pegaCPF = db.usuario.Where(p => p.email.Equals(usuario.email)).FirstOrDefault();

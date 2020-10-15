@@ -9,7 +9,7 @@ namespace empregos.Controllers
 {
     public class HomeController : Controller
     {
-        empregotccEntities3 db = new empregotccEntities3();
+        empregobdlocalEntities2 db = new empregobdlocalEntities2();
         public ActionResult Index()
         {
             return View();

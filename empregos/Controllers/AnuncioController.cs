@@ -14,7 +14,7 @@ namespace empregos.Controllers
 {
     public class AnuncioController : Controller
     {
-        empregotccEntities3 db = new empregotccEntities3();
+        empregobdlocalEntities2 db = new empregobdlocalEntities2();
         // GET: Anuncio
         public ActionResult CreateAnuncio()
         {

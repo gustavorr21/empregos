@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="empregobdlocalModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="anuncio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="text" Nullable="false" />
+          <Property Name="preco" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="medida" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idCategoria" Type="int" Nullable="false" />
+          <Property Name="foto1" Type="varchar" MaxLength="250" />
+          <Property Name="foto2" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="text" Nullable="false" />
+          <Property Name="titulo" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cpf" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="telefone" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="telefone2" Type="varchar" MaxLength="45" />
+          <Property Name="cep" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="rua" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="bairro" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cidade" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="senha" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="perfil" Type="varchar" MaxLength="45" />
+          <Property Name="dataNascimento" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <Association Name="idCategoria">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="1" />
+          <End Role="anuncio" Type="Self.anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="anuncio">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idUsuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="anuncio" Type="Self.anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="anuncio">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="empregobdlocalModelStoreContainer">
+          <EntitySet Name="anuncio" EntityType="Self.anuncio" Schema="empregobdlocal" store:Type="Tables" />
+          <EntitySet Name="categoria" EntityType="Self.categoria" Schema="empregobdlocal" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="empregobdlocal" store:Type="Tables" />
+          <AssociationSet Name="idCategoria" Association="Self.idCategoria">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="anuncio" EntitySet="anuncio" />
+          </AssociationSet>
+          <AssociationSet Name="idUsuario" Association="Self.idUsuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="anuncio" EntitySet="anuncio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="empregobdlocalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="anuncio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="preco" Type="Decimal" Nullable="false" />
+          <Property Name="medida" Type="Decimal" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idCategoria" Type="Int32" Nullable="false" />
+          <Property Name="foto1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="foto2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="categoria" Relationship="Self.idCategoria" FromRole="anuncio" ToRole="categoria" />
+          <NavigationProperty Name="usuario" Relationship="Self.idUsuario" FromRole="anuncio" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="anuncio" Relationship="Self.idCategoria" FromRole="categoria" ToRole="anuncio" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cpf" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefone2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="cep" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rua" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="senha" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="perfil" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="dataNascimento" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="anuncio" Relationship="Self.idUsuario" FromRole="usuario" ToRole="anuncio" />
+        </EntityType>
+        <Association Name="idCategoria">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="1" />
+          <End Role="anuncio" Type="Self.anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="anuncio">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idUsuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="anuncio" Type="Self.anuncio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="anuncio">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="empregobdlocalEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="anuncio" EntityType="Self.anuncio" />
+          <EntitySet Name="categoria" EntityType="Self.categoria" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="idCategoria" Association="Self.idCategoria">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="anuncio" EntitySet="anuncio" />
+          </AssociationSet>
+          <AssociationSet Name="idUsuario" Association="Self.idUsuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="anuncio" EntitySet="anuncio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="empregobdlocalModelStoreContainer" CdmEntityContainer="empregobdlocalEntities2">
+          <EntitySetMapping Name="anuncio">
+            <EntityTypeMapping TypeName="empregobdlocalModel.anuncio">
+              <MappingFragment StoreEntitySet="anuncio">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="medida" ColumnName="medida" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="foto1" ColumnName="foto1" />
+                <ScalarProperty Name="foto2" ColumnName="foto2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categoria">
+            <EntityTypeMapping TypeName="empregobdlocalModel.categoria">
+              <MappingFragment StoreEntitySet="categoria">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="empregobdlocalModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="telefone2" ColumnName="telefone2" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="rua" ColumnName="rua" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="perfil" ColumnName="perfil" />
+                <ScalarProperty Name="dataNascimento" ColumnName="dataNascimento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
