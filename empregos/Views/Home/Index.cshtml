@@ -65,3 +65,17 @@
         <span class="sr-only">Next</span>
     </a>
 </div><!-- /.carousel -->
+
+<script src="~/signalr/hubs"></script>
+<script type="text/javascript" src="@Url.Content("~/signalr/hubs")"></script>
+
+<div class="noti-content" align="center">
+    <label>Anuncios mais vistos da semana</label>
+    <ul id="notiContent"></ul>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/signalr")
+    @Scripts.Render("/signalr/hubs")
+}

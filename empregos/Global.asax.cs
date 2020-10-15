@@ -8,6 +8,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Security.Principal;
 using empregos.Mappers;
+using Microsoft.AspNet.SignalR;
 
 namespace empregos
 {
@@ -20,6 +21,7 @@ namespace empregos
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperConfig.RegisterMappings();
+            
 
         }
 
